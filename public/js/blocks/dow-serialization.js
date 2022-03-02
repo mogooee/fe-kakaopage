@@ -6,7 +6,7 @@ import { webtoonCard } from "../components/webtoon-card.js";
 const position = "beforeend";
 const marginTop = 20;
 const paddingTop = 20;
-const cardHeight = 205;
+const cardHeight = 210;
 const navHeight = 65 * 2;
 const webtoonLineLength = 5;
 const mainAdBannerHeight = 480;
