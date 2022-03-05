@@ -1,12 +1,8 @@
 import { renderingNav } from "../index.js";
 import { settingContents } from "../controllers/setting-contents.js";
 
-const blockingRerendering = (selectedNav, selectedValue) => {
-  let originalSelected;
-  document.querySelectorAll(`.${selectedNav} li`).forEach((e) => {
-    if (e.id === "selected") originalSelected = e.dataset.value;
-  });
-  return originalSelected === selectedValue;
+const blockingRerendering = (selectedElement) => {
+  if (selectedElement.id === "selected") return true;
 };
 
 export const handleCategory = (e) => {
@@ -16,7 +12,7 @@ export const handleCategory = (e) => {
   const selectedNav = e.target.parentNode.parentNode
     .getAttribute("class")
     .split(" ")[0];
-  if (blockingRerendering(selectedNav, selectedValue)) return;
+  if (blockingRerendering(selectedElement)) return;
   renderingNav(selectedNav, selectedElement);
   settingContents(selectedNav, selectedValue);
 };
