@@ -1,6 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-const fs = require("fs");
+const fs_promise = require("fs").promises;
 
 const getHtml = async () => {
   try {
@@ -14,7 +14,7 @@ const getHtml = async () => {
 
 getHtml()
   .then((html) => {
-    let ulList = [];
+    const ulList = [];
     const $ = cheerio.load(html.data);
     const $bodyList = $("div.css-19y0ur2").children("a");
     $bodyList.each(function (i, elem) {
@@ -28,15 +28,9 @@ getHtml()
     return ulList;
   })
   .then((res) => {
-    console.log(res);
-    fs.writeFile(
-      "webtoons.json",
-      JSON.stringify(res, null, 2),
-      "utf8",
-      (err) => {
-        if (err) {
-          console.log(err);
-        }
-      }
-    );
+    fs_promise
+      .writeFile("refactor.json", JSON.stringify(res, null, 2))
+      .catch((err) => {
+        throw err;
+      });
   });
