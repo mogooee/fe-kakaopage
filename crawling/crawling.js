@@ -28,9 +28,8 @@ getHtml()
     return ulList;
   })
   .then((res) => {
-    fs_promise
-      .writeFile("refactor.json", JSON.stringify(res, null, 2))
-      .catch((err) => {
-        throw err;
-      });
+    return fs_promise.writeFile("refactor.json", JSON.stringify(res, null, 2));
+  })
+  .catch((err) => {
+    throw err;
   });
